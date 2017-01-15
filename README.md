@@ -3,6 +3,8 @@
 This is a example configurations to help development more speedy for Drupal.
 You can choose 3 example configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
 
+日本語のREADMEは[こちら](https://github.com/blauerberg/drupal-on-docker/blob/master/README_ja.md)
+
 ## Overview
 
 Example configuration includes the following containers:
@@ -13,15 +15,11 @@ Example configuration includes the following containers:
 | MariaDB | db | <a href="https://hub.docker.com/_/mariadb/" target="_blank">mariadb</a> | 3306 |
 | PHP-FPM 5.6 / 7.0 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | 9000 (for Xdebug) |
 
-## System Requirements
-
-- Lastest version of Docker for MAC on macOS Sierra
-- Lastest version of Docker for Windows on Windows 10
-- Lastest version of docker engine on linux
-
 ## Prerequisites
 
-- Install [Docke for MAC](https://docs.docker.com/docker-for-mac/)/[Docker for Windows](https://docs.docker.com/docker-for-windows/)/[Docker engine](https://docs.docker.com/engine/installation/linux/ubuntulinux/) according to your host os.
+- Lastest version of [Docker for MAC](https://docs.docker.com/docker-for-mac/) on macOS Sierra
+- Lastest version of [Docker for Windows](https://docs.docker.com/docker-for-windows/) on Windows 10
+- Lastest version of [Docker engine](https://docs.docker.com/engine/installation/linux/ubuntulinux/) on linux
 - If you use Docker for Windows, [enable shared drives](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/)
 
 ## Getting started
