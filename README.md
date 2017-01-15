@@ -25,20 +25,24 @@ $ cd drupal-on-docker
 
 This git repository has 3 example configration according to amount of resource in the host machine.
 
-- example-tiny: less than 8GB ram
-- example: less than 16GB ram
-- example-huge: more than 16GB ram
+- [example-tiny](https://github.com/blauerberg/drupal-on-docker/tree/master/example-tiny): less than 8GB ram
+- [example](https://github.com/blauerberg/drupal-on-docker/tree/master/example): less than 16GB ram
+- [example-huge](https://github.com/blauerberg/drupal-on-docker/tree/master/example-huge): more than 16GB ram
 
 For example, if you use a windows/OS X with 8GB ram, you should use "example-tiny" configuration.
 ```bash
 $ cd example-tiny
 ```
 
-Next, create a directory to mount source code of drupal.
+Next, create a directory to mount source code of Drupal.
 ```bash
 $ mkdir volumes
-$ curl https://ftp.drupal.org/files/projects/drupal-X.YY.tar.gz | tar zx --strip=1 -C volumes/drupal
-$ mv drupal-X.yy drupal
+```
+
+download & extract Drupal source code.
+```bash
+# Note: replace "X.Y.Z" in below to  Drupal's version you'd like to use.
+$ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
 ```
 
 create & start containers.
@@ -46,12 +50,12 @@ create & start containers.
 $ docker-compose up -d
 ```
 
-if you use linux host, you have to fix permissions for your drupal directory with:
+if you use Linux host, you have to fix permissions for your Drupal directory with:
 ```bash
 $ docker-compose exec php chown -R www-data:www-data /var/www/html/sites/default
 ```
 
-Access your drupal site.
+Access your Drupal site.
 ```bash
 $ open http://localhost # or open http://localhost on your browser.
 ```
