@@ -15,6 +15,8 @@ Example configuration includes the following containers:
 
 ## Getting started
 
+### Start containers
+
 First, get a example configurations.
 ```bash
 $ git clone https://github.com/blauerberg/drupal-on-docker.git
@@ -53,3 +55,51 @@ Access your drupal site.
 ```bash
 $ open http://localhost # or open http://localhost on your browser.
 ```
+
+### Install Drupal
+
+Credentials of database is configured in docker-compose.yml.
+Default value is below:
+
+- Database Name: `drupal`
+- Username: `drupal`
+- Password: `drupal`
+
+Please see also "Environment Variables" section in https://hub.docker.com/_/mariadb/
+
+In this container set, nginx, mariadb and php-fpm run on the separate containers.
+Therefore, please note that hostname of database server when installing Drupal is `db`, not `localhost`.
+
+Instead of the installation wizard, you can install Drupal using Drush as follows:
+
+```bash
+$ docker-compose exec php drush -y --root="/var/www/html" site-install standard --site-name="Drupal on Docker" --account-name="drupal" --account-pass="drupal" --db-url="mysql://drupal:drupal@db/drupal"
+```
+
+## Other tips
+
+### Access inside the containers
+
+You should use `docker-compose exec` instead of ssh.
+
+```bash
+$ docker-compose exec {Service name} /bin/bash
+# ex. docker-compose exec php /bin/bash
+```
+
+### Use Drush
+
+Drush is installed in php container.
+
+```bash
+$ docker-compose exec php drush st
+```
+
+### Connect database
+
+Via Drush:
+```bash
+$ docker-compose exec php drush sql-cli
+```
+
+Database container is exposing port 3306 on 127.0.0.1. So you can access database in the container from GUI application on Host OS such as [MysqlWorkbench](https://www.mysql.com/products/workbench/), [Sequel Pro](https://www.sequelpro.com/).
