@@ -1,0 +1,25 @@
+[server]
+character_set_server = utf8mb4
+
+[mysqld]
+max_allowed_packet = 128M
+key_buffer_size = 32M
+query_cache_size = 256M
+join_buffer_size = 4M
+read_buffer_size = 4M
+read_rnd_buffer_size = 4M
+sort_buffer_size = 4M
+innodb_large_prefix = true
+innodb_file_format = barracuda
+innodb_file_per_table = 1
+innodb_buffer_pool_size = 2048M
+innodb_log_files_in_group = 2
+innodb_log_file_size = 1024M
+innodb_log_buffer_size = 16M
+innodb_additional_mem_pool_size = 16M
+innodb_read_io_threads = 8
+innodb_write_io_threads = 8
+
+[embedded]
+
+[mariadb]
