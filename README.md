@@ -3,9 +3,19 @@
 This is a example configurations to help development more speedy for Drupal.
 You can choose 3 example configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
 
-## Quick start
+## Overview
 
-First, get a example configuration.
+Example configuration includes the following containers:
+
+| Container | Service name | Image | Exposed port |
+| --------- | ------------ | ----- | ------------ |
+| Nginx | web | <a href="https://hub.docker.com/_/nginx/" target="_blank">nginx</a> | 80 |
+| MariaDB | db | <a href="https://hub.docker.com/_/mariadb/" target="_blank">mariadb</a> | 3306 |
+| PHP-FPM 5.6 / 7.0 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | 9000 (for Xdebug) |
+
+## Getting started
+
+First, get a example configurations.
 ```bash
 $ git clone https://github.com/blauerberg/drupal-on-docker.git
 $ cd drupal-on-docker
@@ -39,66 +49,7 @@ if you use linux host, you have to fix permissions for your drupal directory wit
 $ docker-compose exec php chown -R www-data:www-data /var/www/html/sites/default
 ```
 
-access your drupal site!
+Access your drupal site.
 ```bash
-$ open http://localhost
+$ open http://localhost # or open http://localhost on your browser.
 ```
-
-### Example of docker-compose.yml for Quick start
-```
-version: '2'
-
-services:
-  datastore:
-    image: busybox
-    volumes:
-      # put your drupal source code and mount as volume.
-      - ./volumes/drupal:/var/www/html
-    container_name: drupal_datastore
-  mysql:
-    image: mariadb:10.1
-    volumes_from:
-      - datastore
-    volumes:
-      # override mysql config if necessary.
-      - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
-      # It is also possible to save mysql files to on host filesystem.
-      # - ./volumes/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: drupal
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
-    ports:
-      - "3306:3306"
-    container_name: drupal_mysql
-  php:
-    image: blauerberg/drupal-php:7.0-fpm
-    volumes_from:
-      - datastore
-    volumes:
-      # allocate large memory_limit for drush.
-      - ./php/php.ini:/usr/local/etc/php/php.ini
-      # override php-fpm config to use xdebug with port 9000.
-      - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
-    links:
-      - mysql
-    container_name: drupal_php
-  nginx:
-    image: nginx:1.10
-    links:
-      - php
-    volumes_from:
-      - datastore
-    volumes:
-      # override nginx config to execute drupal through the php container.
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"
-    container_name: drupal_nginx
-```
-
-## License
-
-MIT
