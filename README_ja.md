@@ -37,14 +37,16 @@ $ cd drupal-on-docker
 - [standard](https://github.com/blauerberg/drupal-on-docker/tree/master/standard): メモリが16GB以下のマシン向け
 - [huge](https://github.com/blauerberg/drupal-on-docker/tree/master/huge): 16GB以上のメモリを持つマシン向け
 
-例えば、メモリが8GBのWindowsもしくはOS Xを使っている場合は、`tiny` を利用すると良いでしょう。
+例えば、メモリが8GBのWindowsもしくはmacOSを使っている場合は、`tiny` を利用すると良いでしょう。
 ```bash
 $ cd tiny
 ```
 
 次にDrupalのソースコードをマウントするためのディレクトリを作成します。
+デフォルトの設定では、ホストマシンの `volumes/drupal` をコンテナーのデータボリュームとしてマウントします。:w
+
 ```bash
-$ mkdir volumes
+$ mkdir -p volumes/drupal
 ```
 
 Drupalのソースコードをダウンロードして展開します。
@@ -54,6 +56,7 @@ $ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --stri
 ```
 
 コンテナーを生成して起動します。
+Note: `docker-compose` コマンドは `docker-compose.yml` があるディレクトリ内で実行する必要があります。
 ```bash
 $ docker-compose up -d
 ```
@@ -70,7 +73,7 @@ $ open http://localhost # もしくはブラウザで http://localhost へアク
 
 ### Drupalのインストール
 
-データベースの認証情報は `docker-compose-yml` で設定されています。
+データベースの認証情報は `docker-compose.yml` で設定されています。
 デフォルト値は以下になります。
 
 - Database Name: `drupal`
@@ -86,6 +89,12 @@ $ open http://localhost # もしくはブラウザで http://localhost へアク
 
 ```bash
 $ docker-compose exec php drush -y --root="/var/www/html" site-install standard --site-name="Drupal on Docker" --account-name="drupal" --account-pass="drupal" --db-url="mysql://drupal:drupal@db/drupal" --locale=ja
+```
+
+## コンテナーを停止する
+
+```
+$ docker-compose stop
 ```
 
 ## Other tips

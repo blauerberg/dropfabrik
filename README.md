@@ -38,14 +38,14 @@ This git repository has 3 configurations according to amount of resource in the 
 - [standard](https://github.com/blauerberg/drupal-on-docker/tree/master/standard): less than 16GB ram
 - [huge](https://github.com/blauerberg/drupal-on-docker/tree/master/huge): more than 16GB ram
 
-For example, if you use a windows/OS X with 8GB ram, you should use "tiny" configuration.
+For example, if you use a windows/macOS with 8GB ram, you should use "tiny" configuration.
 ```bash
 $ cd tiny
 ```
 
 Next, create a directory to mount source code of Drupal.
 ```bash
-$ mkdir volumes
+$ mkdir -p volumes/drupal
 ```
 
 download & extract Drupal source code.
@@ -55,6 +55,8 @@ $ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --stri
 ```
 
 create & start containers.
+Note: `docker-compose` command must be executed in the directory containing `docker-compose.yml`.
+
 ```bash
 $ docker-compose up -d
 ```
@@ -87,6 +89,12 @@ Instead of the installation wizard, you can install Drupal using Drush as follow
 
 ```bash
 $ docker-compose exec php drush -y --root="/var/www/html" site-install standard --site-name="Drupal on Docker" --account-name="drupal" --account-pass="drupal" --db-url="mysql://drupal:drupal@db/drupal"
+```
+
+## Stop containers
+
+```
+$ docker-compose stop
 ```
 
 ## Other tips
