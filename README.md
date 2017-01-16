@@ -54,7 +54,7 @@ download & extract Drupal source code.
 $ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
 ```
 
-If you use macOS, highly recommend using [docker-sync](https://github.com/EugenMayer/docker-sync/) to avoid [performance problems](https://github.com/docker/for-mac/issues/77). please see [Use docker-sync](Use docker-sync).
+If you use macOS, highly recommend using [docker-sync](https://github.com/EugenMayer/docker-sync/) to avoid [performance problems](https://github.com/docker/for-mac/issues/77). please see [Use docker-sync](#use-docker-sync).
 
 create & start containers.
 ```bash

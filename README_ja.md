@@ -56,7 +56,7 @@ $ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --stri
 ```
 
 macOSを使っている場合、[パフォーマンスの問題](https://github.com/docker/for-mac/issues/77) を回避するために [docker-sync](https://github.com/EugenMayer/docker-sync/) を利用することを強く推奨します。
-[Use docker-sync](Use docker-sync) を参照してください。
+[Use docker-sync](#docker-sync-を使う) を参照してください。
 
 コンテナーを生成して起動します。
 ```bash
