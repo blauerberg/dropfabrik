@@ -1,6 +1,6 @@
-# Drupal on Docker
+# DrupalOnDocker
 
-このレポジトリにはDrupalの開発を素早く行うためのDockerのコンテナーセットが含まれています。
+DrupalOnDockerにはDrupalの開発を素早く行うためのDockerのコンテナーセットが含まれています。
 開発マシンのスペックに応じて3種類のコンフィグが用意されており、5分から10分程度でDrupalの環境をDocker上に構築することができます。
 
 ## 概要
@@ -33,13 +33,13 @@ $ cd drupal-on-docker
 
 レポジトリの中には開発マシンのスペックに応じた3種類のコンフィグが用意されています。
 
-- [example-tiny](https://github.com/blauerberg/drupal-on-docker/tree/master/example-tiny): メモリが8GB以下のマシン向け
-- [example](https://github.com/blauerberg/drupal-on-docker/tree/master/example): メモリが16GB以下のマシン向け
-- [example-huge](https://github.com/blauerberg/drupal-on-docker/tree/master/example-huge): 16GB以上のメモリを持つマシン向け
+- [tiny](https://github.com/blauerberg/drupal-on-docker/tree/master/tiny): メモリが8GB以下のマシン向け
+- [standard](https://github.com/blauerberg/drupal-on-docker/tree/master/standard): メモリが16GB以下のマシン向け
+- [huge](https://github.com/blauerberg/drupal-on-docker/tree/master/huge): 16GB以上のメモリを持つマシン向け
 
-例えば、メモリが8GBのWindowsもしくはOS Xを使っている場合は、`example-tiny` を利用すると良いでしょう。
+例えば、メモリが8GBのWindowsもしくはOS Xを使っている場合は、`tiny` を利用すると良いでしょう。
 ```bash
-$ cd example-tiny
+$ cd tiny
 ```
 
 次にDrupalのソースコードをマウントするためのディレクトリを作成します。
