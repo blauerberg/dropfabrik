@@ -1,5 +1,5 @@
 syncs:
-  drupal-source:
+  drupal_source:
     src: './volumes/drupal'
     dest: '/var/www/html'
     sync_strategy: 'unison'

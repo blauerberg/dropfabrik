@@ -34,7 +34,7 @@ services:
     volumes:
       # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
       # See also: https://github.com/docker/for-mac/issues/77
-      # - drupal-source:/var/www/html:rw
+      # - drupal_source:/var/www/html:rw
       # allocate large memory_limit for drush.
       - ./php/php.ini:/usr/local/etc/php/php.ini
       # override php-fpm config to use xdebug with port 9000.
@@ -53,7 +53,7 @@ services:
     volumes:
       # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
       # See also: https://github.com/docker/for-mac/issues/77
-      # - drupal-source:/var/www/html:rw
+      # - drupal_source:/var/www/html:rw
       # override nginx config to execute drupal through the php container.
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
@@ -61,5 +61,5 @@ services:
     container_name: drupal_web
 
 #volumes:
-#  drupal-source:
+#  drupal_source:
 #    external: true
