@@ -10,6 +10,7 @@ services:
 
   db:
     image: mariadb:10.1
+    #image: mysql:5.7
     volumes:
       # override mysql config if necessary.
       - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
@@ -26,6 +27,8 @@ services:
 
   php:
     image: blauerberg/drupal-php:7.0-fpm
+    #image: blauerberg/drupal-php:7.1-fpm
+    #image: blauerberg/drupal-php:5.6-fpm
     volumes_from:
       - datastore
     volumes:
