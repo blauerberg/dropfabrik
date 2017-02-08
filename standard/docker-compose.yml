@@ -7,6 +7,7 @@ services:
       # put your drupal source code and mount as volume.
       - ./volumes/drupal:/var/www/html
     container_name: drupal_datastore
+
   db:
     image: mariadb:10.1
     volumes:
@@ -22,6 +23,7 @@ services:
     ports:
       - "3306:3306"
     container_name: drupal_db
+
   php:
     image: blauerberg/drupal-php:7.0-fpm
     volumes_from:
@@ -38,6 +40,7 @@ services:
     links:
       - db
     container_name: drupal_php
+
   web:
     image: nginx:1.10
     links:
