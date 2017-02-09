@@ -179,14 +179,14 @@ Please see also: https://github.com/EugenMayer/docker-sync/wiki
 ### Deploy to production environment (example)
 
 You can also deploy this container set to production environment such as Amazon EC2.
-For example, to deploy Amazon ECS, you can following instruction below.
+For example, to deploy Amazon EC2, you can following instruction below.
 
 First, create your docker engine on Amazon EC2.
 ```
 $ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c drupal-on-docker
 ```
 
-Note: in default, this instance use security group named "docker-machine" and it will be rejected any http traffic. So you have to change setting of the security group to accept http.
+Note: in default, this instance use security group named `docker-machine` and it will be rejected any http traffic. So you have to change setting of the security group to accept http.
 
 And Then, set the environment variables to use remote docker engine.
 ```
