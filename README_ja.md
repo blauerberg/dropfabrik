@@ -195,7 +195,7 @@ Note: デフォルトでは `docker-machine` というセキュリティーグ�
 eval $(docker-machine env drupal-on-docker)
 ```
 
-次に、Drupalのソースコードをデータベースのダンプを配置します。
+次に、Drupalのソースコードとデータベースのダンプを配置します。
 ```
 $ git clone https://github.com/blauerberg/drupal-on-docker.git
 $ cd drupal-on-docker/standard
