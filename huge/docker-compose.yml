@@ -1,65 +1,19 @@
 version: '2'
 
 services:
-  datastore:
-    image: busybox
-    volumes:
-      # put your drupal source code and mount as volume.
-      - ./volumes/drupal:/var/www/html
-    container_name: drupal_datastore
-
   db:
     image: mariadb:10.1
     #image: mysql:5.7
-    volumes:
-      # override mysql config if necessary.
-      - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
-      # It is also possible to save mysql files to on host filesystem.
-      # - ./volumes/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: drupal
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
-    ports:
-      - "3306:3306"
-    container_name: drupal_db
 
   php:
     image: blauerberg/drupal-php:7.0-fpm
     #image: blauerberg/drupal-php:7.1-fpm
     #image: blauerberg/drupal-php:5.6-fpm
-    volumes_from:
-      - datastore
-    volumes:
-      # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-      # See also: https://github.com/docker/for-mac/issues/77
-      # - drupal_source:/var/www/html:rw
-      # allocate large memory_limit for drush.
-      - ./php/php.ini:/usr/local/etc/php/php.ini
-      # override php-fpm config to use xdebug with port 9000.
-      - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
     links:
       - db
-    container_name: drupal_php
 
   web:
     image: nginx:1.10
     links:
       - php
-    volumes_from:
-      - datastore
-    volumes:
-      # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-      # See also: https://github.com/docker/for-mac/issues/77
-      # - drupal_source:/var/www/html:rw
-      # override nginx config to execute drupal through the php container.
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"
-    container_name: drupal_web
 
-#volumes:
-#  drupal_source:
-#    external: true

@@ -75,7 +75,7 @@ Note: `docker-compose` command must be executed in the directory containing `doc
 
 ### Install Drupal
 
-Credentials of database is configured in docker-compose.yml.
+Credentials of database is configured in docker-compose.override.yml.
 Default value is below:
 
 - Database Name: `drupal`
@@ -135,7 +135,7 @@ $ gem install docker-sync
 $ brew install fswatch
 ```
 
-Also you have to some changes into `docker-compose.yml`.
+Also you have to some changes into `docker-compose.override.yml`.
 
 - comment out `volumes_from` block (2 places):
 ```

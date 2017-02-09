@@ -77,7 +77,7 @@ Note: `docker-compose` コマンドは `docker-compose.yml` があるディレ�
 
 ### Drupalのインストール
 
-データベースの認証情報は `docker-compose.yml` で設定されています。
+データベースの認証情報は `docker-compose.override.yml` で設定されています。
 デフォルト値は以下になります。
 
 - Database Name: `drupal`
@@ -137,7 +137,7 @@ $ gem install docker-sync
 $ brew install fswatch
 ```
 
-また、docker-sync を使う場合は `docker-compose.yml` を少し書き換える必要があります。
+また、docker-sync を使う場合は `docker-compose.override.yml` を少し書き換える必要があります。
 
 - `volumes_from` ブロックをコメントアウトする (2箇所):
 ```
