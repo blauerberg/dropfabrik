@@ -143,18 +143,18 @@ Also you have to some changes into `docker-compose.override.yml`.
 # - datastore
 ```
 
-- uncomment `drupal-source` block (2 places):
+- uncomment `drupal_source` block (2 places):
 
 ```
 # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
 # See also: https://github.com/docker/for-mac/issues/77
-- drupal-source:/var/www/html:rw
+- drupal_source:/var/www/html:rw
 ```
 
 - uncomment `volumes` block at the bottom
 ```
 volumes:
-  drupal-source:
+  drupal_source:
     external: true
 ```
 

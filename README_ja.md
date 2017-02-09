@@ -43,7 +43,7 @@ $ cd tiny
 ```
 
 次にDrupalのソースコードをマウントするためのディレクトリを作成します。
-デフォルトの設定では、ホストマシンの `volumes/drupal` をコンテナーのデータボリュームとしてマウントします。:w
+デフォルトの設定では、ホストマシンの `volumes/drupal` をコンテナーのデータボリュームとしてマウントします。
 
 ```bash
 $ mkdir -p volumes/drupal
@@ -145,18 +145,18 @@ $ brew install fswatch
 # - datastore
 ```
 
-- `drupal-source` ブロックのコメントアウトを解除する (2箇所):
+- `drupal_source` ブロックのコメントアウトを解除する (2箇所):
 
 ```
 # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
 # See also: https://github.com/docker/for-mac/issues/77
-- drupal-source:/var/www/html:rw
+- drupal_source:/var/www/html:rw
 ```
 
 - 最下部にある `volumes` ブロックのコメントアウトを解除する
 ```
 volumes:
-  drupal-source:
+  drupal_source:
     external: true
 ```
 
