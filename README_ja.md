@@ -178,5 +178,48 @@ $ docker-sync-stack start
 
 詳細は https://github.com/EugenMayer/docker-sync/wiki を参照してください。
 
+### Production環境へのデプロイ (example)
+
+このコンテナーセットは(例えばAmazon EC2のような)Production環境へデプロイすることも出来ます。
+例えば、Amazon EC2へのデプロイは次のように行います。
+
+まず、Amazon EC2にDocker engineを作成します。
+```
+$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c drupal-on-docker
+```
+
+Note: デフォルトでは `docker-machine` というセキュリティーグループが使われますが、このグループは全てのHTTP通信を拒否します。そのため、セキュリティグループの設定を変更しHTTP通信を許可するようにしてください。
+
+作成したDocker engineを使うために環境変数を設定します。
+```
+eval $(docker-machine env drupal-on-docker)
+```
+
+次に、Drupalのソースコードをデータベースのダンプを配置します。
+```
+$ git clone https://github.com/blauerberg/drupal-on-docker.git
+$ cd drupal-on-docker/standard
+
+# Drupalのソースコードをダウンロード
+$ mkdir volumes
+$ git clone {YOUR_GIT_REPO_URI} volumes/drupal
+# 既存のサイトのデータベースのダンプを mysql/initdb.sql.gz という名前でコピーする。
+$ cp /some/path/your_site_db.sql.gz mysql/initdb.sql.gz
+
+もしくは、新しいサイトを立ち上げるためにデフォルトのDrupalのソースコードをダウンロードします。
+
+$ mkdir -p volumes/drupal
+$ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
+# 英語以外の言語でインストールを行いたい場合は、 sites/default/files/translations ディレクトリを作成します。
+$ mkdir -p volumes/drupal/sites/default/files/translations
+```
+
+最後にイメージを生成してデプロイします。
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.production.yml up --build
+```
+
+Note: Note: `docker-compose.production.yml` はシンプルなユースケース向けのサンプルです。セキュリティなどの設定は必要に応じて変更してください。
+
 ## Supporting Organizations
 - https://annai.co.jp
