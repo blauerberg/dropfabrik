@@ -120,6 +120,15 @@ Drushは`php`コンテナーにインストールされています。
 $ docker-compose exec php drush st
 ```
 
+### 既存のサイトのデータベースをリストアする
+
+gzipで圧縮されたSQLのダンプファイルを `initdb.sql.gz` という名前で配置し、`docker-compose.override.yml` の以下の行のコメントアウトを解除してください。
+コンテナの生成時に一度だけこのファイルがロードされ、データベースが復元されます。
+
+```
+- ./initdb.sql.gz:/docker-entrypoint-initdb.d/initdb.sql.gz
+```
+
 ### データベースに接続する
 
 Drush経由で接続する:

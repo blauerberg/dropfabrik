@@ -118,6 +118,15 @@ Drush is installed in php container.
 $ docker-compose exec php drush st
 ```
 
+### Restore database from existing site
+
+Put gzipped sql dump as `initdb.sql.gz` and uncomment below line at `docker-compose.override.yml`.
+It will be loaded by mariadb and will restore once only at generating the container.
+
+```
+- ./initdb.sql.gz:/docker-entrypoint-initdb.d/initdb.sql.gz
+```
+
 ### Connect database
 
 Via Drush:
