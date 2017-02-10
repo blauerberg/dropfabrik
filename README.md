@@ -1,9 +1,9 @@
-# DrupalOnDocker
+# Drop Fabrik
 
-"DrupalonDocker" is configuration of Docker to help development more speedy for Drupal.
+"Drop Fabrik" is configuration of Docker to help development more speedy for Drupal.
 You can choose 3 configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
 
-日本語のREADMEは[こちら](https://github.com/blauerberg/drupal-on-docker/blob/master/README_ja.md)
+日本語のREADMEは[こちら](https://github.com/blauerberg/dropfabrik/blob/master/README_ja.md)
 
 ## Overview
 
@@ -28,15 +28,15 @@ Example configuration includes the following containers:
 
 First, get a configurations.
 ```bash
-$ git clone https://github.com/blauerberg/drupal-on-docker.git
-$ cd drupal-on-docker
+$ git clone https://github.com/blauerberg/dropfabrik.git
+$ cd dropfabrik
 ```
 
 This git repository has 3 configurations according to amount of resource in the host machine.
 
-- [tiny](https://github.com/blauerberg/drupal-on-docker/tree/master/tiny): less than 8GB ram
-- [standard](https://github.com/blauerberg/drupal-on-docker/tree/master/standard): less than 16GB ram
-- [huge](https://github.com/blauerberg/drupal-on-docker/tree/master/huge): more than 16GB ram
+- [tiny](https://github.com/blauerberg/dropfabrik/tree/master/tiny): less than 8GB ram
+- [standard](https://github.com/blauerberg/dropfabrik/tree/master/standard): less than 16GB ram
+- [huge](https://github.com/blauerberg/dropfabrik/tree/master/huge): more than 16GB ram
 
 For example, if you use a windows/macOS with 8GB ram, you should use "tiny" configuration.
 ```bash
@@ -183,20 +183,20 @@ For example, to deploy Amazon EC2, you can following instruction below.
 
 First, create your docker engine on Amazon EC2.
 ```
-$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c drupal-on-docker
+$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c dropfabrik
 ```
 
 Note: in default, this instance use security group named `docker-machine` and it will be rejected any http traffic. So you have to change setting of the security group to accept http.
 
 And Then, set the environment variables to use remote docker engine.
 ```
-eval $(docker-machine env drupal-on-docker)
+eval $(docker-machine env dropfabrik)
 ```
 
 Next, download your drupal code and database dump.
 ```
-$ git clone https://github.com/blauerberg/drupal-on-docker.git
-$ cd drupal-on-docker/standard
+$ git clone https://github.com/blauerberg/dropfabrik.git
+$ cd dropfabrik/standard
 
 # download your drupal code.
 $ mkdir volumes

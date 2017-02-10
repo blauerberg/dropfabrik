@@ -1,6 +1,6 @@
-# DrupalOnDocker
+# Drop Fabrik
 
-DrupalOnDockerにはDrupalの開発を素早く行うためのDockerのコンテナーセットが含まれています。
+Drop FabrikにはDrupalの開発を素早く行うためのDockerのコンテナーセットが含まれています。
 開発マシンのスペックに応じて3種類のコンフィグが用意されており、5分から10分程度でDrupalの環境をDocker上に構築することができます。
 
 ## 概要
@@ -27,15 +27,15 @@ DrupalOnDockerにはDrupalの開発を素早く行うためのDockerのコンテ
 
 初めにレポジトリをクローンします。
 ```bash
-$ git clone https://github.com/blauerberg/drupal-on-docker.git
-$ cd drupal-on-docker
+$ git clone https://github.com/blauerberg/dropfabrik.git
+$ cd dropfabrik
 ```
 
 レポジトリの中には開発マシンのスペックに応じた3種類のコンフィグが用意されています。
 
-- [tiny](https://github.com/blauerberg/drupal-on-docker/tree/master/tiny): メモリが8GB以下のマシン向け
-- [standard](https://github.com/blauerberg/drupal-on-docker/tree/master/standard): メモリが16GB以下のマシン向け
-- [huge](https://github.com/blauerberg/drupal-on-docker/tree/master/huge): 16GB以上のメモリを持つマシン向け
+- [tiny](https://github.com/blauerberg/dropfabrik/tree/master/tiny): メモリが8GB以下のマシン向け
+- [standard](https://github.com/blauerberg/dropfabrik/tree/master/standard): メモリが16GB以下のマシン向け
+- [huge](https://github.com/blauerberg/dropfabrik/tree/master/huge): 16GB以上のメモリを持つマシン向け
 
 例えば、メモリが8GBのWindowsもしくはmacOSを使っている場合は、`tiny` を利用すると良いでしょう。
 ```bash
@@ -185,20 +185,20 @@ $ docker-sync-stack start
 
 まず、Amazon EC2にDocker engineを作成します。
 ```
-$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c drupal-on-docker
+$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c dropfabrik
 ```
 
 Note: デフォルトでは `docker-machine` というセキュリティーグループが使われますが、このグループは全てのHTTP通信を拒否します。そのため、セキュリティグループの設定を変更しHTTP通信を許可するようにしてください。
 
 作成したDocker engineを使うために環境変数を設定します。
 ```
-eval $(docker-machine env drupal-on-docker)
+eval $(docker-machine env dropfabrik)
 ```
 
 次に、Drupalのソースコードとデータベースのダンプを配置します。
 ```
-$ git clone https://github.com/blauerberg/drupal-on-docker.git
-$ cd drupal-on-docker/standard
+$ git clone https://github.com/blauerberg/dropfabrik.git
+$ cd dropfabrik/standard
 
 # Drupalのソースコードをダウンロード
 $ mkdir volumes
