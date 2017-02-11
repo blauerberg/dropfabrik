@@ -2,6 +2,9 @@
 
 "Drop Fabrik" is configuration of Docker to help development more speedy for Drupal.
 You can choose 3 configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
+And you can also deploy the extactly same environment to the cloud service such as AWS.
+
+Demontration movie is here: https://youtu.be/5VyFQplLH9M
 
 日本語のREADMEは[こちら](https://github.com/blauerberg/dropfabrik/blob/master/README_ja.md)
 
