@@ -36,13 +36,13 @@ $ cd dropfabrik
 
 レポジトリの中には開発マシンのスペックに応じた3種類のコンフィグが用意されています。
 
-- [tiny](https://github.com/blauerberg/dropfabrik/tree/master/tiny): メモリが8GB以下のマシン向け
-- [standard](https://github.com/blauerberg/dropfabrik/tree/master/standard): メモリが16GB以下のマシン向け
-- [huge](https://github.com/blauerberg/dropfabrik/tree/master/huge): 16GB以上のメモリを持つマシン向け
+- [small](https://github.com/blauerberg/dropfabrik/tree/master/small): メモリが8GB以下のマシン向け
+- [large](https://github.com/blauerberg/dropfabrik/tree/master/large): メモリが16GB以下のマシン向け
+- [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): 16GB以上のメモリを持つマシン向け
 
-例えば、メモリが8GBのWindowsもしくはmacOSを使っている場合は、`tiny` を利用すると良いでしょう。
+例えば、メモリが8GBのWindowsもしくはmacOSを使っている場合は、`small` を利用すると良いでしょう。
 ```bash
-$ cd tiny
+$ cd small
 ```
 
 次にDrupalのソースコードをマウントするためのディレクトリを作成します。

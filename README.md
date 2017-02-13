@@ -37,13 +37,13 @@ $ cd dropfabrik
 
 This git repository has 3 configurations according to amount of resource in the host machine.
 
-- [tiny](https://github.com/blauerberg/dropfabrik/tree/master/tiny): less than 8GB ram
-- [standard](https://github.com/blauerberg/dropfabrik/tree/master/standard): less than 16GB ram
-- [huge](https://github.com/blauerberg/dropfabrik/tree/master/huge): more than 16GB ram
+- [small](https://github.com/blauerberg/dropfabrik/tree/master/small): less than 8GB ram
+- [large](https://github.com/blauerberg/dropfabrik/tree/master/large): less than 16GB ram
+- [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): more than 16GB ram
 
-For example, if you use a windows/macOS with 8GB ram, you should use "tiny" configuration.
+For example, if you use a windows/macOS with 8GB ram, you should use "small" configuration.
 ```bash
-$ cd tiny
+$ cd small
 ```
 
 Next, create a directory to mount source code of Drupal.
