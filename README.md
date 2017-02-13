@@ -95,6 +95,7 @@ Instead of the installation wizard, you can install Drupal using Drush as follow
 
 ```bash
 $ docker-compose exec php drush -y --root="/var/www/html" site-install standard --site-name="Drupal on Docker" --account-name="drupal" --account-pass="drupal" --db-url="mysql://drupal:drupal@db/drupal"
+$ docker-compose exec php drush -y config-set system.theme admin bartik
 ```
 
 ## Stop containers
