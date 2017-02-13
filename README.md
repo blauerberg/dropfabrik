@@ -37,6 +37,7 @@ $ cd dropfabrik
 
 This git repository has 3 configurations according to amount of resource in the host machine.
 
+- [micro](https://github.com/blauerberg/dropfabrik/tree/master/micro): less than 4GB ram
 - [small](https://github.com/blauerberg/dropfabrik/tree/master/small): less than 8GB ram
 - [large](https://github.com/blauerberg/dropfabrik/tree/master/large): less than 16GB ram
 - [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): more than 16GB ram

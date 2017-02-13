@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  db:
+    image: mariadb:10.1
+    #image: mysql:5.7
+
+  php:
+    image: blauerberg/drupal-php:7.0-fpm
+    #image: blauerberg/drupal-php:7.1-fpm
+    #image: blauerberg/drupal-php:5.6-fpm
+    links:
+      - db
+
+  web:
+    image: nginx:1.10
+    links:
+      - php
+

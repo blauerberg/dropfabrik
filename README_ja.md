@@ -36,6 +36,7 @@ $ cd dropfabrik
 
 レポジトリの中には開発マシンのスペックに応じた3種類のコンフィグが用意されています。
 
+- [micro](https://github.com/blauerberg/dropfabrik/tree/master/micro): メモリが4GB以下のマシン向け
 - [small](https://github.com/blauerberg/dropfabrik/tree/master/small): メモリが8GB以下のマシン向け
 - [large](https://github.com/blauerberg/dropfabrik/tree/master/large): メモリが16GB以下のマシン向け
 - [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): 16GB以上のメモリを持つマシン向け
