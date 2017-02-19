@@ -1,7 +1,7 @@
 # Drop Fabrik
 
 "Drop Fabrik" is configuration of Docker to help development more speedy for Drupal.
-You can choose 3 configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
+You can choose 4 configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
 And you can also deploy the extactly same environment to the cloud service such as AWS.
 
 Demontration movie is here: https://youtu.be/5VyFQplLH9M
@@ -35,7 +35,7 @@ $ git clone https://github.com/blauerberg/dropfabrik.git
 $ cd dropfabrik
 ```
 
-This git repository has 3 configurations according to amount of resource in the host machine.
+This repository has 4 configurations according to amount of resource in the host machine.
 
 - [micro](https://github.com/blauerberg/dropfabrik/tree/master/micro): less than 4GB ram
 - [small](https://github.com/blauerberg/dropfabrik/tree/master/small): less than 8GB ram

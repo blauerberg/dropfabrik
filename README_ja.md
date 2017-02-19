@@ -1,7 +1,7 @@
 # Drop Fabrik
 
 Drop FabrikにはDrupalの開発を素早く行うためのDockerのコンテナーセットが含まれています。
-開発マシンのスペックに応じて3種類のコンフィグが用意されており、5分から10分程度でDrupalの環境をDocker上に構築することができます。
+開発マシンのスペックに応じて4種類のコンフィグが用意されており、5分から10分程度でDrupalの環境をDocker上に構築することができます。
 また、ローカルマシン上で構築したものと完全に同じ環境を、AWSなどのクラウドサービスにデプロイすることもできます。
 
 デモ動画はこちら: https://youtu.be/5VyFQplLH9M
@@ -34,11 +34,11 @@ $ git clone https://github.com/blauerberg/dropfabrik.git
 $ cd dropfabrik
 ```
 
-レポジトリの中には開発マシンのスペックに応じた3種類のコンフィグが用意されています。
+レポジトリの中には開発マシンのスペックに応じた4種類のコンフィグが用意されています。
 
 - [micro](https://github.com/blauerberg/dropfabrik/tree/master/micro): メモリが4GB以下のマシン向け
-- [small](https://github.com/blauerberg/dropfabrik/tree/master/small): メモリが8GB以下のマシン向け
-- [large](https://github.com/blauerberg/dropfabrik/tree/master/large): メモリが16GB以下のマシン向け
+- [small](https://github.com/blauerberg/dropfabrik/tree/master/small): メモリが4〜8GBのマシン向け
+- [large](https://github.com/blauerberg/dropfabrik/tree/master/large): メモリが8〜16GBのマシン向け
 - [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): 16GB以上のメモリを持つマシン向け
 
 例えば、メモリが8GBのWindowsもしくはmacOSを使っている場合は、`small` を利用すると良いでしょう。
