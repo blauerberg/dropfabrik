@@ -1,4 +1,6 @@
 version: "2"
+options:
+  compose-dev-file-path: 'docker-compose.override.yml'
 syncs:
   drupal_source:
     src: './volumes/drupal'
