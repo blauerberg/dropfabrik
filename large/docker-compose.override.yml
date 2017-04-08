@@ -39,10 +39,13 @@ services:
       # See also: https://github.com/docker/for-mac/issues/77
       # - drupal_source:/var/www/html:rw
       # allocate large memory_limit for drush.
-      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./php/php/php.ini:/usr/local/etc/php/php.ini
       # override php-fpm config to use xdebug with port 9000.
-      - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./php/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+      - ./php/php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./php/php-fpm/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+      # override sendmail_path to use mailhog
+      - ./php/php-fpm/sendmail_path.conf:/usr/local/etc/php-fpm.d/sendmail_path.conf
+      - ./php/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
     #container_name: drupal_php
 
   web:
@@ -57,6 +60,12 @@ services:
     ports:
       - "80:80"
     #container_name: drupal_web
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+    #container_name: drupal_mailhog
 
 #volumes:
 #  drupal_source:
