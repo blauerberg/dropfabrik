@@ -2,7 +2,7 @@ version: '2'
 
 services:
   db:
-    image: mariadb:10.1
+    image: mariadb:10.2
     #image: mysql:5.7
 
   php:
