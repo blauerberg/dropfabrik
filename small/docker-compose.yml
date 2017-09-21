@@ -13,7 +13,7 @@ services:
       - db
 
   web:
-    image: nginx:1.10
+    image: nginx:latest
     links:
       - php
 
