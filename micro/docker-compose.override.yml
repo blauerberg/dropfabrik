@@ -2,17 +2,9 @@
 # The setting is for the development environment.
 # @see https://docs.docker.com/compose/extends/
 
-version: '2'
+version: '3'
 
 services:
-  datastore:
-    image: busybox
-    volumes:
-      # put your drupal source code and mount as volume.
-      - ./volumes/drupal:/var/www/html
-    # take care that container_name must be unique in the docker engine.
-    #container_name: drupal_datastore
-
   db:
     volumes:
       # override mysql config if necessary.
@@ -32,12 +24,9 @@ services:
     #container_name: drupal_db
 
   php:
-    volumes_from:
-      - datastore
     volumes:
-      # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-      # See also: https://github.com/docker/for-mac/issues/77
-      # - drupal_source:/var/www/html:rw
+      # put your drupal source code and mount as volume.
+      - ./volumes/drupal:/var/www/html:cached
       # allocate large memory_limit for drush.
       - ./php/php/php.ini:/usr/local/etc/php/php.ini
       # override php-fpm config to use xdebug with port 9000.
@@ -49,12 +38,9 @@ services:
     #container_name: drupal_php
 
   web:
-    volumes_from:
-      - datastore
     volumes:
-      # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-      # See also: https://github.com/docker/for-mac/issues/77
-      # - drupal_source:/var/www/html:rw
+      # put your drupal source code and mount as volume.
+      - ./volumes/drupal:/var/www/html:cached
       # override nginx config to execute drupal through the php container.
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
@@ -66,7 +52,3 @@ services:
     ports:
       - "8025:8025"
     #container_name: drupal_mailhog
-
-#volumes:
-#  drupal_source:
-#    external: true

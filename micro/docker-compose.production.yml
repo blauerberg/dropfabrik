@@ -1,12 +1,6 @@
-version: '2'
+version: '3'
 
 services:
-  datastore:
-    image: drupal_datastore_prod
-    build: .
-    volumes:
-      - /var/www/html
-
   db:
     image: drupal_db_prod
     build: ./mysql
@@ -19,13 +13,13 @@ services:
   php:
     image: drupal_php_prod
     build: ./php
-    volumes_from:
-      - datastore
+    volumes:
+      - ./volumes/drupal:/var/www/html:cached
 
   web:
     image: drupal_web_prod
     build: ./nginx
-    volumes_from:
-      - datastore
+    volumes:
+      - ./volumes/drupal:/var/www/html:cached
     ports:
       - "80:80"
