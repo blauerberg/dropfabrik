@@ -59,8 +59,6 @@ download & extract Drupal source code.
 $ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
 ```
 
-If you use macOS, highly recommend using [docker-sync](https://github.com/EugenMayer/docker-sync/) to avoid [performance problems](https://github.com/docker/for-mac/issues/77). please see [Use docker-sync](#use-docker-sync).
-
 create & start containers.
 ```bash
 $ docker-compose up -d
@@ -141,55 +139,6 @@ $ docker-compose exec php drush sql-cli
 ```
 
 Database container is exposing port 3306 on 127.0.0.1. So you can access database in the container from GUI application on Host OS such as [MysqlWorkbench](https://www.mysql.com/products/workbench/), [Sequel Pro](https://www.sequelpro.com/).
-
-### Use docker-sync
-
-If you use macOS, highly recommend installing [docker-sync](https://github.com/EugenMayer/docker-sync/) as follows to avoid [performance problems](https://github.com/docker/for-mac/issues/77).
-```bash
-$ gem install docker-sync
-$ brew install fswatch
-```
-
-Also you have to some changes into `docker-compose.override.yml`.
-
-- comment out `volumes_from` block (2 places):
-```
-# volumes_from:
-# - datastore
-```
-
-- uncomment `drupal_source` block (2 places):
-
-```
-# Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-# See also: https://github.com/docker/for-mac/issues/77
-- drupal_source:/var/www/html:rw
-```
-
-- uncomment `volumes` block at the bottom
-```
-volumes:
-  drupal_source:
-    external: true
-```
-
-Start the synchronization with `docker-sync` command
-```bash
-$ docker-sync start
-```
-
-Finally, start container in new shell.
-```bash
-$ docker-compose up -d
-```
-
-Alternatively, you can also run `docker-sync start` and `docker-compose up` together.
-
-```bash
-$ docker-sync-stack start
-```
-
-Please see also: https://github.com/EugenMayer/docker-sync/wiki
 
 ### Deploy to production environment (example)
 
