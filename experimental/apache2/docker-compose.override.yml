@@ -1,0 +1,44 @@
+# This file will be load at executing "docker-compose up".
+# The setting is for the development environment.
+# @see https://docs.docker.com/compose/extends/
+
+version: '3'
+
+services:
+  db:
+    volumes:
+      # override mysql config if necessary.
+      - ./mysql/server.cnf:/etc/mysql/conf.d/server.cnf
+      # It is also possible to save mysql files to on host filesystem.
+      # - ./volumes/mysql:/var/lib/mysql
+      # If /docker-entrypoint-initdb.d/*.sql.gz is exists at generating the container,
+      # it will be loaded by mariadb and will restore only once.
+      # - ./initdb.sql.gz:/docker-entrypoint-initdb.d/initdb.sql.gz
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+    ports:
+      - "3306:3306"
+    #container_name: drupal_db
+
+  php:
+    volumes:
+      # put your drupal source code and mount as volume.
+      - ./volumes/drupal:/var/www/html:cached
+      # allocate large memory_limit for drush.
+      - ./php/php/php.ini:/usr/local/etc/php/php.ini
+      # override sendmail_path to use mailhog
+      - ./php/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
+      # override apache config for drupal
+      - ./php/apache2/default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "80:80"
+    #container_name: drupal_web
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+    #container_name: drupal_mailhog

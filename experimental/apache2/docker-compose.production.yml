@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: drupal_db_prod
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+
+  php:
+    image: drupal_php_prod
+    build: ./php
+    volumes:
+      - ./volumes/drupal:/var/www/html:cached
+
+  web:
+    image: drupal_web_prod
+    build: ./nginx
+    volumes:
+      - ./volumes/drupal:/var/www/html:cached
+    ports:
+      - "80:80"
