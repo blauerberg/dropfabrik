@@ -145,17 +145,12 @@ Database container is exposing port 3306 on 127.0.0.1. So you can access databas
 ### Use docker-sync
 
 If you use macOS, highly recommend installing [docker-sync](https://github.com/EugenMayer/docker-sync/) as follows to avoid [performance problems](https://github.com/docker/for-mac/issues/77).
-```bash
-$ gem install docker-sync
-$ brew install fswatch
-```
 
 Also you have to some changes into `docker-compose.override.yml`.
 
 - comment out `volumes_from` block (2 places):
 ```
-# volumes_from:
-# - datastore
+# - ./volumes/drupal:/var/www/html:cached
 ```
 
 - uncomment `drupal_source` block (2 places):

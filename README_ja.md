@@ -146,18 +146,13 @@ $ docker-compose exec php drush sql-cli
 
 ### docker-sync を使う
 
-macOSを使っている場合、[パフォーマンスの問題](https://github.com/docker/for-mac/issues/77) を回避するために [docker-sync](https://github.com/EugenMayer/docker-sync/) を利用することを強く推奨します。次のコマンドでインストールすることができます。
-```bash
-$ gem install docker-sync
-$ brew install fswatch
-```
+macOSを使っている場合、[パフォーマンスの問題](https://github.com/docker/for-mac/issues/77) を回避するために [docker-sync](https://github.com/EugenMayer/docker-sync/) を利用することを強く推奨します。インストール方法は [docker-sync.io](http://docker-sync.io/) を参照してください。
 
 また、docker-sync を使う場合は `docker-compose.override.yml` を少し書き換える必要があります。
 
 - `volumes_from` ブロックをコメントアウトする (2箇所):
 ```
-# volumes_from:
-# - datastore
+# - ./volumes/drupal:/var/www/html:cached
 ```
 
 - `drupal_source` ブロックのコメントアウトを解除する (2箇所):
