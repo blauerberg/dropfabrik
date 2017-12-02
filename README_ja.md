@@ -60,6 +60,9 @@ Drupalのソースコードをダウンロードして展開します。
 $ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
 ```
 
+macOSを使っている場合、[パフォーマンスの問題](https://github.com/docker/for-mac/issues/77) を回避するために [docker-sync](https://github.com/EugenMayer/docker-sync/) を利用することを強く推奨します。
+[Use docker-sync](#docker-sync-を使う) を参照してください。
+
 コンテナーを生成して起動します。
 ```bash
 $ docker-compose up -d
@@ -140,6 +143,55 @@ $ docker-compose exec php drush sql-cli
 ```
 
 データベースコンテナーは 127.0.0.1上でport 3306をlistenします。そのため、[MysqlWorkbench](https://www.mysql.com/products/workbench/) や [Sequel Pro](https://www.sequelpro.com/) のようなホストOS上で動作するGUIアプリケーションからコンテナー内のデータベースに接続することができます。
+
+### docker-sync を使う
+
+macOSを使っている場合、[パフォーマンスの問題](https://github.com/docker/for-mac/issues/77) を回避するために [docker-sync](https://github.com/EugenMayer/docker-sync/) を利用することを強く推奨します。次のコマンドでインストールすることができます。
+```bash
+$ gem install docker-sync
+$ brew install fswatch
+```
+
+また、docker-sync を使う場合は `docker-compose.override.yml` を少し書き換える必要があります。
+
+- `volumes_from` ブロックをコメントアウトする (2箇所):
+```
+# volumes_from:
+# - datastore
+```
+
+- `drupal_source` ブロックのコメントアウトを解除する (2箇所):
+
+```
+# Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
+# See also: https://github.com/docker/for-mac/issues/77
+- drupal_source:/var/www/html:rw
+```
+
+- 最下部にある `volumes` ブロックのコメントアウトを解除する
+```
+volumes:
+  drupal_source:
+    external: true
+```
+
+`docker-sync` コマンドで同期を開始します。
+```bash
+$ docker-sync start
+```
+
+最後に新しいシェルを立ち上げてコンテナーを起動します。
+```bash
+$ docker-compose up -d
+```
+
+もしくは、`docker-sync start` と `docker-compose up` を同時に実行することもできます。
+
+```bash
+$ docker-sync-stack start
+```
+
+詳細は https://github.com/EugenMayer/docker-sync/wiki を参照してください。
 
 ### Production環境へのデプロイ (example)
 
