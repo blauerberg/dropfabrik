@@ -1,10 +1,8 @@
 # Drop Fabrik
 
 "Drop Fabrik" is configuration of Docker to help development more speedy for Drupal.
-You can choose 4 configration according to amount of resource in your machine, and will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
+You will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
 And you can also deploy the extactly same environment to the cloud service such as AWS.
-
-Demontration movie is here: https://youtu.be/5VyFQplLH9M
 
 日本語のREADMEは[こちら](https://github.com/blauerberg/dropfabrik/blob/master/README_ja.md)
 
@@ -14,9 +12,10 @@ Example configuration includes the following containers:
 
 | Container | Service name | Image | Exposed port |
 | --------- | ------------ | ----- | ------------ |
-| Nginx | web | <a href="https://hub.docker.com/_/nginx/" target="_blank">nginx</a> | 80 |
+| Nginx Proxy | nginx-proxy | <a href="https://hub.docker.com/r/jwilder/nginx-proxy/" target="_blank">jwilder/nginx-proxy</a> | 80 |
+| Nginx | web | <a href="https://hub.docker.com/_/nginx/" target="_blank">nginx</a> | |
 | MariaDB | db | <a href="https://hub.docker.com/_/mariadb/" target="_blank">mariadb</a> | 3306 |
-| PHP-FPM 5.6 / 7.0 / 7.1 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | 9000 (for Xdebug) |
+| PHP-FPM 5.6 / 7.0 / 7.1 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | |
 | mailhog | mailhog | <a href="https://hub.docker.com/r/mailhog/mailhog/" target="_blank">mailhog/mailhog</a> | 8025 (HTTP server) |
 
 ## Prerequisites
@@ -34,18 +33,6 @@ First, get a configurations.
 ```bash
 $ git clone https://github.com/blauerberg/dropfabrik.git
 $ cd dropfabrik
-```
-
-This repository has 4 configurations according to amount of resource in the host machine.
-
-- [micro](https://github.com/blauerberg/dropfabrik/tree/master/micro): less than 4GB ram
-- [small](https://github.com/blauerberg/dropfabrik/tree/master/small): less than 8GB ram
-- [large](https://github.com/blauerberg/dropfabrik/tree/master/large): less than 16GB ram
-- [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): more than 16GB ram
-
-For example, if you use a windows/macOS with 8GB ram, you should use "small" configuration.
-```bash
-$ cd small
 ```
 
 Next, create a directory to mount source code of Drupal.
@@ -75,8 +62,6 @@ Access your Drupal site.
 ```bash
 $ open http://localhost # or open http://localhost on your browser.
 ```
-
-Note: `docker-compose` command must be executed in the directory containing `docker-compose.yml`.
 
 ### Install Drupal
 
@@ -206,7 +191,6 @@ eval $(docker-machine env dropfabrik)
 Next, download your drupal code and database dump.
 ```
 $ git clone https://github.com/blauerberg/dropfabrik.git
-$ cd dropfabrik/standard
 
 # download your drupal code.
 $ mkdir volumes
