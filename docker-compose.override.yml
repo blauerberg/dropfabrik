@@ -46,6 +46,8 @@ services:
     #container_name: drupal_php
 
   web:
+    environment:
+      VIRTUAL_HOST: localhost
     volumes:
       # put your drupal source code and mount as volume.
       - ./volumes/drupal:/var/www/html:cached
@@ -54,9 +56,15 @@ services:
       # - drupal_source:/var/www/html:rw
       # override nginx config to execute drupal through the php container.
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    #container_name: drupal_web
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy:latest
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - "80:80"
-    #container_name: drupal_web
+    #container_name: drupal_nginx_proxy
 
   mailhog:
     image: mailhog/mailhog
