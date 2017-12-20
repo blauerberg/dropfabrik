@@ -1,10 +1,8 @@
 # Drop Fabrik
 
-Drop FabrikにはDrupalの開発を素早く行うためのDockerのコンテナーセットが含まれています。
-開発マシンのスペックに応じて4種類のコンフィグが用意されており、5分から10分程度でDrupalの環境をDocker上に構築することができます。
+Drop FabrikはDrupalの開発環境を素早く立ち上げるためのDocker環境です。
+5分から10分程度でDrupalの環境をDocker上に構築することができます。
 また、ローカルマシン上で構築したものと完全に同じ環境を、AWSなどのクラウドサービスにデプロイすることもできます。
-
-デモ動画はこちら: https://youtu.be/5VyFQplLH9M
 
 ## 概要
 
@@ -12,9 +10,10 @@ Drop FabrikにはDrupalの開発を素早く行うためのDockerのコンテナ
 
 | Container | Service name | Image | Exposed port |
 | --------- | ------------ | ----- | ------------ |
-| Nginx | web | <a href="https://hub.docker.com/_/nginx/" target="_blank">nginx</a> | 80 |
+| Nginx Proxy | nginx-proxy | <a href="https://hub.docker.com/r/jwilder/nginx-proxy/" target="_blank">jwilder/nginx-proxy</a> | 80 |
+| Nginx | web | <a href="https://hub.docker.com/_/nginx/" target="_blank">nginx</a> | |
 | MariaDB | db | <a href="https://hub.docker.com/_/mariadb/" target="_blank">mariadb</a> | 3306 |
-| PHP-FPM 5.6 / 7.0 / 7.1 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | 9000 (for Xdebug) |
+| PHP-FPM 5.6 / 7.0 / 7.1 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | |
 | mailhog | mailhog | <a href="https://hub.docker.com/r/mailhog/mailhog/" target="_blank">mailhog/mailhog</a> | 8025 (HTTP server) |
 
 ## 動作環境
@@ -33,18 +32,6 @@ Drop FabrikにはDrupalの開発を素早く行うためのDockerのコンテナ
 ```bash
 $ git clone https://github.com/blauerberg/dropfabrik.git
 $ cd dropfabrik
-```
-
-レポジトリの中には開発マシンのスペックに応じた4種類のコンフィグが用意されています。
-
-- [micro](https://github.com/blauerberg/dropfabrik/tree/master/micro): メモリが4GB以下のマシン向け
-- [small](https://github.com/blauerberg/dropfabrik/tree/master/small): メモリが4〜8GBのマシン向け
-- [large](https://github.com/blauerberg/dropfabrik/tree/master/large): メモリが8〜16GBのマシン向け
-- [xlarge](https://github.com/blauerberg/dropfabrik/tree/master/xlarge): 16GB以上のメモリを持つマシン向け
-
-例えば、メモリが8GBのWindowsもしくはmacOSを使っている場合は、`small` を利用すると良いでしょう。
-```bash
-$ cd small
 ```
 
 次にDrupalのソースコードをマウントするためのディレクトリを作成します。
@@ -78,8 +65,6 @@ Drupalにアクセスします。
 $ open http://localhost # もしくはブラウザで http://localhost へアクセス
 ```
 
-Note: `docker-compose` コマンドは `docker-compose.yml` があるディレクトリ内で実行する必要があります。
-
 ### Drupalのインストール
 
 データベースの認証情報は `docker-compose.override.yml` で設定されています。
@@ -98,10 +83,11 @@ Note: `docker-compose` コマンドは `docker-compose.yml` があるディレ�
 
 ```bash
 $ docker-compose exec php drush -y --root="/var/www/html" site-install standard --site-name="Drupal on Docker" --account-name="drupal" --account-pass="drupal" --db-url="mysql://drupal:drupal@db/drupal" --locale=ja
+# Drupal 8の場合は以下も実行
 $ docker-compose exec php drush -y config-set system.theme admin bartik
 ```
 
-## コンテナーを停止する
+## コンテナを停止する
 
 ```
 $ docker-compose stop
@@ -208,7 +194,6 @@ eval $(docker-machine env dropfabrik)
 次に、Drupalのソースコードとデータベースのダンプを配置します。
 ```
 $ git clone https://github.com/blauerberg/dropfabrik.git
-$ cd dropfabrik/standard
 
 # Drupalのソースコードをダウンロード
 $ mkdir volumes
