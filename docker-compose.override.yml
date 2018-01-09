@@ -38,6 +38,9 @@ services:
       # override sendmail_path to use mailhog
       - ./php/php-fpm/sendmail_path.conf:/usr/local/etc/php-fpm.d/sendmail_path.conf
       - ./php/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
+      # use your host's ssh key, drushrc
+      # - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+      # - ~/.drush/aliases.drushrc.php:/root/.drush/aliases.drushrc.php:ro
 
       # for apache image
       # - ./apache2/php/php.ini:/usr/local/etc/php/php.ini
