@@ -1,2 +1,3 @@
 volumes
 initdb.sql.gz
+.idea
