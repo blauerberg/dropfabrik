@@ -63,11 +63,14 @@ services:
   #    #- ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
   #    #- ~/.drush/aliases.drushrc.php:/root/.drush/aliases.drushrc.php:ro
   #    #- ~/.drush/drushrc.php:/root/.drush/drushrc.php:ro
+  #  ports:
+  #    - "80:80"
   #  #container_name: drupal_php
 
   web:
     environment:
-      VIRTUAL_HOST: localhost
+      VIRTUAL_HOST: annai.local
+      #CERT_NAME: default
     volumes:
       # put your drupal source code and mount as volume.
       - ./volumes/drupal:/var/www/html:cached
