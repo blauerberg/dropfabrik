@@ -48,6 +48,23 @@ services:
       # - ./apache2/apache2/default.conf:/etc/apache2/sites-available/000-default.conf
     #container_name: drupal_php
 
+  # for apache image
+  #php:
+  #  volumes:
+  #    # put your drupal source code and mount as volume.
+  #    - ./volumes/drupal:/var/www/html:cached
+  #    # Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
+  #    # See also: https://github.com/docker/for-mac/issues/77
+  #    # - drupal_source:/var/www/html:rw
+  #    - ./apache2/php/php.ini:/usr/local/etc/php/php.ini
+  #    - ./apache2/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
+  #    - ./apache2/apache2/default.conf:/etc/apache2/sites-available/000-default.conf
+  #    # use your host's ssh key, drushrc
+  #    #- ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+  #    #- ~/.drush/aliases.drushrc.php:/root/.drush/aliases.drushrc.php:ro
+  #    #- ~/.drush/drushrc.php:/root/.drush/drushrc.php:ro
+  #  #container_name: drupal_php
+
   web:
     environment:
       VIRTUAL_HOST: localhost
