@@ -59,12 +59,14 @@ services:
       # - drupal_source:/var/www/html:rw
       # override nginx config to execute drupal through the php container.
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/override_for_development.conf:/etc/nginx/conf.d/override_for_development.conf
     #container_name: drupal_web
 
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-proxy/override_for_development.conf:/etc/nginx/conf.d/override_for_development.conf
     ports:
       - "80:80"
     #container_name: drupal_nginx_proxy
