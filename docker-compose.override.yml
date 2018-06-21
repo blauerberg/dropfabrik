@@ -69,7 +69,7 @@ services:
 
   web:
     environment:
-      VIRTUAL_HOST: annai.local
+      VIRTUAL_HOST: localhost
       #CERT_NAME: default
     volumes:
       # put your drupal source code and mount as volume.
