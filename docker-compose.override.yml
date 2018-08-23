@@ -21,7 +21,6 @@ services:
       MYSQL_PASSWORD: drupal
     ports:
       - "3306:3306"
-    #container_name: drupal_db
 
   php:
     volumes:
@@ -42,12 +41,6 @@ services:
       # - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
       # - ~/.drush/aliases.drushrc.php:/root/.drush/aliases.drushrc.php:ro
 
-      # for apache image
-      # - ./apache2/php/php.ini:/usr/local/etc/php/php.ini
-      # - ./apache2/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
-      # - ./apache2/apache2/default.conf:/etc/apache2/sites-available/000-default.conf
-    #container_name: drupal_php
-
   # for apache image
   #php:
   #  volumes:
@@ -65,7 +58,6 @@ services:
   #    #- ~/.drush/drushrc.php:/root/.drush/drushrc.php:ro
   #  ports:
   #    - "80:80"
-  #  #container_name: drupal_php
 
   web:
     environment:
@@ -80,7 +72,6 @@ services:
       # override nginx config to execute drupal through the php container.
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/override_for_development.conf:/etc/nginx/conf.d/override_for_development.conf
-    #container_name: drupal_web
 
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
@@ -89,13 +80,11 @@ services:
       - ./nginx-proxy/override_for_development.conf:/etc/nginx/conf.d/override_for_development.conf
     ports:
       - "80:80"
-    #container_name: drupal_nginx_proxy
 
   mailhog:
     image: mailhog/mailhog
     ports:
       - "8025:8025"
-    #container_name: drupal_mailhog
 
 #volumes:
 #  drupal_source:
