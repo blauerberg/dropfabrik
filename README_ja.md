@@ -3,6 +3,10 @@
 Drop FabrikはDrupalの開発環境を素早く立ち上げるためのDocker環境です。
 5分から10分程度でDrupalの環境をDocker上に構築することができます。
 
+## コンセプト
+
+「使う際にビルドしない」
+
 ## 概要
 
 以下のコンテナーイメージで構成されています。
@@ -93,6 +97,25 @@ $ docker-compose stop
 ```
 
 ## Other tips
+
+### webサーバーのホスト名を変更する
+
+デフォルトでは `localhost` でのみwebサーバーにアクセスできるようになっています。
+他の名前でアクセスしたい場合は、`docker-compose.override.yml` を開き、 `VIRTUAL_HOST` の値を変更してください。
+また、hosts ファイルを編集し、`127.0.0.1` で `VIRTUAL_HOST` で指定したホスト名が解決できるようにしてください。
+
+### PHPのバージョンを変更する
+
+`docker-compose.yml` を編集し、使いたいPHPのバージョンに対応したイメージを使うように変更してください。
+
+### drupal-composer/drupal-project で管理されたコードを利用する
+
+Drupal.orgで配布されているアーカイブをそのまま利用する場合は、ルートディレクトリがそのままDrupalのソースコードの最上位ディレクトリになりますが、
+[drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project) でDrupalのプロジェクトを管理している場合は、 `web` ディレクトリ以下がDrupalのソースコードとなります。
+
+そのため、drupal-composer/drupal-projectで管理されているコードを利用する場合はwebサーバーのドキュメントルートを変更する必要があります。
+`docker-compose.override.yml` を編集し、`web` サービスのボリュームで `nginx/default.conf` の代わりに `nginx/default_for_drupal_composer.conf` をマウントするように変更してください。
+
 
 ### コンテナの内部にアクセスする
 
