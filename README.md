@@ -74,7 +74,7 @@ Default value is below:
 
 Please see also "Environment Variables" section in https://hub.docker.com/_/mariadb/
 
-In this container set, nginx, mariadb and php-fpm run on the separate containers.
+In Dropfabrik, nginx, mariadb and php-fpm run on the separate containers.
 Therefore, please note that hostname of database server when installing Drupal is `db`, not `localhost`.
 
 Instead of the installation wizard, you can install Drupal using Drush as follows:

@@ -82,7 +82,7 @@ $ open http://localhost # もしくはブラウザで http://localhost へアク
 
 詳細については https://hub.docker.com/_/mariadb/ の "Environment Variables" を参照してください。
 
-このコンテナーセットではnginx、mariadb、php-fpmは全て別々のコンテナーで動作します。
+Dropfabrikではnginx、mariadb、php-fpmは全て別々のコンテナーで動作します。
 そのため、インストール時にデータベースサーバーのホスト名に `localhost` ではなく `db` を指定する必要があります。
 
 ブラウザからウィザードでインストールする代わりに、以下のようにDrushを使ってインストールすることもできます。
