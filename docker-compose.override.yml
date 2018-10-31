@@ -52,6 +52,7 @@ services:
   #    - ./apache2/php/php.ini:/usr/local/etc/php/php.ini
   #    - ./apache2/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
   #    - ./apache2/apache2/default.conf:/etc/apache2/sites-available/000-default.conf
+  #    #- ./apache2/apache2/default_for_drupal_composer.conf:/etc/apache2/sites-available/000-default.conf
   #    # use your host's ssh key, drushrc
   #    #- ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
   #    #- ~/.drush/aliases.drushrc.php:/root/.drush/aliases.drushrc.php:ro
@@ -62,7 +63,6 @@ services:
   web:
     environment:
       VIRTUAL_HOST: localhost
-      #CERT_NAME: default
     volumes:
       # put your drupal source code and mount as volume.
       - ./volumes/drupal:/var/www/html:cached
@@ -71,6 +71,7 @@ services:
       # - drupal_source:/var/www/html:rw
       # override nginx config to execute drupal through the php container.
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      #- ./nginx/default_for_drupal_composer.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/override_for_development.conf:/etc/nginx/conf.d/override_for_development.conf
 
   nginx-proxy:
