@@ -2,7 +2,6 @@
 
 "Drop Fabrik" is configuration of Docker to help development more speedy for Drupal.
 You will be able to build a Drupal environment on Docker in 5 to 10 minutes with the following steps.
-And you can also deploy the extactly same environment to the cloud service such as AWS.
 
 日本語のREADMEは[こちら](https://github.com/blauerberg/dropfabrik/blob/master/README_ja.md)
 
@@ -122,7 +121,7 @@ It will be loaded by mariadb and will restore once only at generating the contai
 
 Via Drush:
 ```bash
-$ docker-compose exec php drush sql-cli
+$ docker-compose exec php drush sqlc
 ```
 
 Database container is exposing port 3306 on 127.0.0.1. So you can access database in the container from GUI application on Host OS such as [MysqlWorkbench](https://www.mysql.com/products/workbench/), [Sequel Pro](https://www.sequelpro.com/).
@@ -131,87 +130,14 @@ Database container is exposing port 3306 on 127.0.0.1. So you can access databas
 
 If you use macOS, highly recommend installing [docker-sync](https://github.com/EugenMayer/docker-sync/) as follows to avoid [performance problems](https://github.com/docker/for-mac/issues/77).
 
-Also you have to some changes into `docker-compose.override.yml`.
-
-- comment out `volumes_from` block (2 places):
-```
-# - ./volumes/drupal:/var/www/html:cached
-```
-
-- uncomment `drupal_source` block (2 places):
-
-```
-# Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-# See also: https://github.com/docker/for-mac/issues/77
-- drupal_source:/var/www/html:rw
-```
-
-- uncomment `volumes` block at the bottom
-```
-volumes:
-  drupal_source:
-    external: true
-```
-
-Start the synchronization with `docker-sync` command
-```bash
-$ docker-sync start
-```
-
-Finally, start container in new shell.
-```bash
-$ docker-compose up -d
-```
-
-Alternatively, you can also run `docker-sync start` and `docker-compose up` together.
+If you use docker-sync please copy `docker-compose.override-for-docker-sync.yml` as` docker-compose.override.yml`.
+Also, you need to run the image with `docker-sync-stack` instead of` docker-compose`.
 
 ```bash
 $ docker-sync-stack start
 ```
 
 Please see also: https://github.com/EugenMayer/docker-sync/wiki
-
-### Deploy to production environment (example)
-
-You can also deploy this container set to production environment such as Amazon EC2.
-For example, to deploy Amazon EC2, you can following instruction below.
-
-First, create your docker engine on Amazon EC2.
-```
-$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c dropfabrik
-```
-
-Note: in default, this instance use security group named `docker-machine` and it will be rejected any http traffic. So you have to change setting of the security group to accept http.
-
-And Then, set the environment variables to use remote docker engine.
-```
-eval $(docker-machine env dropfabrik)
-```
-
-Next, download your drupal code and database dump.
-```
-$ git clone https://github.com/blauerberg/dropfabrik.git
-
-# download your drupal code.
-$ mkdir volumes
-$ git clone {YOUR_GIT_REPO_URI} volumes/drupal
-# copy your database dump of existing site as mysql/initdb.sql.gz
-$ cp /some/path/your_site_db.sql.gz mysql/initdb.sql.gz
-
-or download vanila drupal to launch new site
-
-$ mkdir -p volumes/drupal
-$ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
-# if you want to install drupal with your language, you have to create sites/default/files/translation dir.
-$ mkdir -p volumes/drupal/sites/default/files/translations
-```
-
-Finally, build your docker image and deploy it.
-```
-$ docker-compose -f docker-compose.yml -f docker-compose.production.yml up --build
-```
-
-Note: Note: `docker-compose.production.yml` is an example configuration for simple use case.
 
 ## Supporting Organizations
 - https://annai.co.jp

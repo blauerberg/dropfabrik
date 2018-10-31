@@ -2,11 +2,10 @@
 
 Drop FabrikはDrupalの開発環境を素早く立ち上げるためのDocker環境です。
 5分から10分程度でDrupalの環境をDocker上に構築することができます。
-また、ローカルマシン上で構築したものと完全に同じ環境を、AWSなどのクラウドサービスにデプロイすることもできます。
 
 ## 概要
 
-以下のコンテナー郡で構成されています。
+以下のコンテナーイメージで構成されています。
 
 | Container | Service name | Image | Exposed port |
 | --------- | ------------ | ----- | ------------ |
@@ -125,7 +124,7 @@ gzipで圧縮されたSQLのダンプファイルを `initdb.sql.gz` という�
 
 Drush経由で接続する:
 ```bash
-$ docker-compose exec php drush sql-cli
+$ docker-compose exec php drush sqlc
 ```
 
 データベースコンテナーは 127.0.0.1上でport 3306をlistenします。そのため、[MysqlWorkbench](https://www.mysql.com/products/workbench/) や [Sequel Pro](https://www.sequelpro.com/) のようなホストOS上で動作するGUIアプリケーションからコンテナー内のデータベースに接続することができます。
@@ -134,87 +133,14 @@ $ docker-compose exec php drush sql-cli
 
 macOSを使っている場合、[パフォーマンスの問題](https://github.com/docker/for-mac/issues/77) を回避するために [docker-sync](https://github.com/EugenMayer/docker-sync/) を利用することを強く推奨します。インストール方法は [docker-sync.io](http://docker-sync.io/) を参照してください。
 
-また、docker-sync を使う場合は `docker-compose.override.yml` を少し書き換える必要があります。
-
-- `volumes_from` ブロックをコメントアウトする (2箇所):
-```
-# - ./volumes/drupal:/var/www/html:cached
-```
-
-- `drupal_source` ブロックのコメントアウトを解除する (2箇所):
-
-```
-# Replace volume to this to use docker-sync for mac OS users to resolve performance issue.
-# See also: https://github.com/docker/for-mac/issues/77
-- drupal_source:/var/www/html:rw
-```
-
-- 最下部にある `volumes` ブロックのコメントアウトを解除する
-```
-volumes:
-  drupal_source:
-    external: true
-```
-
-`docker-sync` コマンドで同期を開始します。
-```bash
-$ docker-sync start
-```
-
-最後に新しいシェルを立ち上げてコンテナーを起動します。
-```bash
-$ docker-compose up -d
-```
-
-もしくは、`docker-sync start` と `docker-compose up` を同時に実行することもできます。
+docker-syncを使う場合は `docker-compose.override-for-docker-sync.yml` を `docker-compose.override.yml` としてコピーしてください。
+また、`docker-compose` の代わりに `docker-sync-stack` でイメージを起動する必要があります。
 
 ```bash
 $ docker-sync-stack start
 ```
 
 詳細は https://github.com/EugenMayer/docker-sync/wiki を参照してください。
-
-### Production環境へのデプロイ (example)
-
-このコンテナーセットは(例えばAmazon EC2のような)Production環境へデプロイすることも出来ます。
-例えば、Amazon EC2へのデプロイは次のように行います。
-
-まず、Amazon EC2にDocker engineを作成します。
-```
-$ docker-machine create --driver amazonec2 --amazonec2-instance-type t2.large --amazonec2-region ap-northeast-1 --amazonec2-zone c dropfabrik
-```
-
-Note: デフォルトでは `docker-machine` というセキュリティーグループが使われますが、このグループは全てのHTTP通信を拒否します。そのため、セキュリティグループの設定を変更しHTTP通信を許可するようにしてください。
-
-作成したDocker engineを使うために環境変数を設定します。
-```
-eval $(docker-machine env dropfabrik)
-```
-
-次に、Drupalのソースコードとデータベースのダンプを配置します。
-```
-$ git clone https://github.com/blauerberg/dropfabrik.git
-
-# Drupalのソースコードをダウンロード
-$ mkdir volumes
-$ git clone {YOUR_GIT_REPO_URI} volumes/drupal
-# 既存のサイトのデータベースのダンプを mysql/initdb.sql.gz という名前でコピーする。
-$ cp /some/path/your_site_db.sql.gz mysql/initdb.sql.gz
-
-もしくは、新しいサイトを立ち上げるためにデフォルトのDrupalのソースコードをダウンロードします。
-
-$ mkdir -p volumes/drupal
-$ curl https://ftp.drupal.org/files/projects/drupal-X.Y.Z.tar.gz | tar zx --strip=1 -C volumes/drupal
-# 英語以外の言語でインストールを行いたい場合は、 sites/default/files/translations ディレクトリを作成します。
-$ mkdir -p volumes/drupal/sites/default/files/translations
-```
-
-最後にイメージを生成してデプロイします。
-```
-$ docker-compose -f docker-compose.yml -f docker-compose.production.yml up --build
-```
-
-Note: Note: `docker-compose.production.yml` はシンプルなユースケース向けのサンプルです。セキュリティなどの設定は必要に応じて変更してください。
 
 ## Supporting Organizations
 - https://annai.co.jp
