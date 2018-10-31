@@ -153,7 +153,9 @@ Drush経由で接続する:
 $ docker-compose exec php drush sqlc
 ```
 
-データベースコンテナーは 127.0.0.1上でport 3306をlistenします。そのため、[MysqlWorkbench](https://www.mysql.com/products/workbench/) や [Sequel Pro](https://www.sequelpro.com/) のようなホストOS上で動作するGUIアプリケーションからコンテナー内のデータベースに接続することができます。
+データベースコンテナは 127.0.0.1上でport 3306をlistenします。そのため、[MysqlWorkbench](https://www.mysql.com/products/workbench/) や [Sequel Pro](https://www.sequelpro.com/) のようなホストOS上で動作するGUIアプリケーションからコンテナー内のデータベースに接続することができます。
+
+また、 `http://localhost:8080` にアクセスすると [phpmyadmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) を利用してデータベースにアクセスすることもできます。
 
 ### docker-sync を使う
 
