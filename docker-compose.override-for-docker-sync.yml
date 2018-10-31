@@ -81,6 +81,21 @@ services:
     ports:
       - "8025:8025"
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_PORT: 3306
+    links:
+      - db
+    volumes:
+      - ./phpmyadmin/php-fpm.conf:/etc/php-fpm.conf
+    ports:
+       - 8080:80
+
 volumes:
   drupal_source:
     external: true
