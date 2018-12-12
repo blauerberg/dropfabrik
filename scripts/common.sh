@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function drush8_sa() {
   docker-compose exec php drush sa
