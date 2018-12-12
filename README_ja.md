@@ -119,6 +119,12 @@ Drupal.orgで配布されているアーカイブをそのまま利用する場�
 そのため、drupal-composer/drupal-projectで管理されているコードを利用する場合はwebサーバーのドキュメントルートを変更する必要があります。
 `docker-compose.override.yml` を編集し、`web` サービスのボリュームで `nginx/default.conf` の代わりに `nginx/default_for_drupal_composer.conf` をマウントするように変更してください。
 
+### 秘密鍵を含んだphpイメージをビルドする
+
+drushなどで秘密鍵を使うケースを考慮し、 `docker-compose.override.yml` に `php` イメージにホストOS側の秘密鍵をマウントするサンプルを用意しています。
+ホストOSがlinuxとMacOSの場合はこの方法で問題ありませんが、ホストOSがWindowsの場合、[ホスト側のファイルシステムの問題](https://github.com/docker/for-win/issues/167) で秘密鍵のパーミッションが正しく設定されません。
+
+この問題のワークアラウンドとして、 `php/php-fpm/id_rsa` に秘密鍵をコピーし `docker-compose build` すると秘密鍵入りのカスタムイメージをビルドすることができます。
 
 ### コンテナの内部にアクセスする
 
