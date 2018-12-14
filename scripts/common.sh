@@ -7,11 +7,13 @@ function drush8_sa() {
 function drush8_sql_sync() {
   docker-compose exec php drush -y sql-sync $1 @self
   fix_permission_for_drush8
+  drush8_cc
 }
 
 function drush8_rsync() {
   docker-compose exec php drush -y rsync $1:%files @self:%files
   fix_permission_for_drush8
+  drush8_cc
 }
 
 function drush8_cc() {
@@ -25,11 +27,13 @@ function drush9_sa() {
 function drush9_sql_sync() {
   docker-compose exec php vendor/bin/drush -y sql:sync $1 @self
   fix_permission_for_drush9
+  drush9_cc
 }
 
 function drush9_rsync() {
   docker-compose exec php vendor/bin/drush -y rsync $1:%files @self:%files
   fix_permission_for_drush9
+  drush9_cc
 }
 
 function drush9_cc() {
