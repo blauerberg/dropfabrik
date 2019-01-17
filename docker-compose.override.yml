@@ -23,7 +23,6 @@ services:
       - "3306:3306"
 
   php:
-    build: php/php-fpm
     volumes:
       # put your drupal source code and mount as volume.
       - ./volumes/drupal:/var/www/html:cached
