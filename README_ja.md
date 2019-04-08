@@ -21,6 +21,7 @@ Drupalの稼働に必要な環境を作っています。
 | PHP-FPM 5.6 / 7.0 / 7.1 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | |
 | mailhog | mailhog | <a href="https://hub.docker.com/r/mailhog/mailhog/" target="_blank">mailhog/mailhog</a> | 8025 (HTTP server) |
 | phpmyadmin | phpmyadmin | <a href="https://hub.docker.com/r/phpmyadmin/phpmyadmin/" target="_blank">phpmyadmin/phpmyadmin</a> | 8080 (HTTP server) |
+| dozzle | dozzle | <a href="https://hub.docker.com/r/amir20/dozzle" target="_blank">amir20/dozzle</a> | 8081 (HTTP server) |
 
 ## 動作環境
 
@@ -100,6 +101,11 @@ $ docker-compose stop
 ```
 
 ## Other tips
+
+### うまく動きません！
+
+Dropfabrikにはコンテナ内のログをブラウザ上で表示するために[Dozzle](https://hub.docker.com/r/amir20/dozzle)が組み込まれています。
+http://localhost:8081 にアクセスしてコンテナ内で何が起こっているのが確認してみましょう。周りにサポートしてくれるエンジニアがいる場合、Dozzleのログをそのまま見せるのは良い方法です。
 
 ### webサーバーのホスト名を変更する
 

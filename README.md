@@ -17,6 +17,7 @@ Example configuration includes the following containers:
 | PHP-FPM 5.6 / 7.0 / 7.1 | php | <a href="https://hub.docker.com/r/blauerberg/drupal-php/" target="_blank">blauerberg/drupal-php</a> | |
 | mailhog | mailhog | <a href="https://hub.docker.com/r/mailhog/mailhog/" target="_blank">mailhog/mailhog</a> | 8025 (HTTP server) |
 | phpmyadmin | phpmyadmin | <a href="https://hub.docker.com/r/phpmyadmin/phpmyadmin/" target="_blank">phpmyadmin/phpmyadmin</a> | 8080 (HTTP server) |
+| dozzle | dozzle | <a href="https://hub.docker.com/r/amir20/dozzle" target="_blank">amir20/dozzle</a> | 8081 (HTTP server) |
 
 ## Prerequisites
 
@@ -91,6 +92,11 @@ $ docker-compose stop
 ```
 
 ## Other tips
+
+### It's not work for me!
+
+Dropfabrik includes [Dozzle](https://hub.docker.com/r/amir20/dozzle) to display logs inside the container on a browser.
+Let's go to http://localhost:8081 to see what's happening inside the container. If you can get some help from someone, it's a good idea to show the Dozzle log as it is.
 
 ### Access inside the containers
 
