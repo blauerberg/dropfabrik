@@ -102,6 +102,13 @@ services:
     ports:
        - 8080:80
 
+  dozzle:
+    image: amir20/dozzle
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+       - 8081:8080
+
 #volumes:
 #  drupal_source:
 #    external: true
