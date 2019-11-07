@@ -36,7 +36,6 @@ services:
       - ./php/php-fpm/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
       # override sendmail_path to use mailhog
       - ./php/php-fpm/sendmail_path.conf:/usr/local/etc/php-fpm.d/sendmail_path.conf
-      - ./php/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
       # use your host's ssh key, drushrc
       # - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
       # - ~/.drush/aliases.drushrc.php:/root/.drush/aliases.drushrc.php:ro
@@ -50,7 +49,6 @@ services:
   #    # See also: https://github.com/docker/for-mac/issues/77
   #    # - drupal_source:/var/www/html:rw
   #    - ./apache2/php/php.ini:/usr/local/etc/php/php.ini
-  #    - ./apache2/ssmtp/ssmtp.conf:/etc/ssmtp/ssmtp.conf
   #    - ./apache2/apache2/default.conf:/etc/apache2/sites-available/000-default.conf
   #    #- ./apache2/apache2/default_for_drupal_composer.conf:/etc/apache2/sites-available/000-default.conf
   #    # use your host's ssh key, drushrc
