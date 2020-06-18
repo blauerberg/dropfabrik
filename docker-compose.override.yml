@@ -2,7 +2,7 @@
 # The setting is for the development environment.
 # @see https://docs.docker.com/compose/extends/
 
-version: '3'
+version: '3.8'
 
 services:
   db:
